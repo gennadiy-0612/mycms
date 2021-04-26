@@ -9,8 +9,7 @@ shch.includeHTML = function (file, showAjax) {
         nghttp.onreadystatechange = function () {
             if (this.readyState === 4) {
                 if (this.status === 200) {
-                    Json = JSON.parse(this.responseText);
-                    showIt.innerHTML = Json;
+                    showIt.innerHTML = this.responseText;
                 }
                 if (this.status === 404) {
                     showIt.innerHTML = "Page not found.";
