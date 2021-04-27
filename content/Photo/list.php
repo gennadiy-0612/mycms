@@ -14,7 +14,7 @@ $ext = '*[.jpg|.jpeg]';
 echo showLink($ext);
 
 // Открываем файл в бинарном режиме
-$fp = fopen('../content/Photo/IMG_20200308_115201_EDIT_1-01.jpeg', 'rb');
+$fp = fopen('IMG_20200308_115201_EDIT_1-01.jpeg', 'rb');
 
 if (!$fp) {
     echo 'Ошибка: Невозможно открыть файл для чтения';
