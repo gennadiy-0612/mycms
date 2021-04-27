@@ -1,5 +1,5 @@
 <?php
-//ob_start();
+ob_start("ob_gzhandler");
 $ssl = $_SERVER['SERVER_NAME'] == 'localhost' ? 'http://localhost' : 'https://p.cx.ua/pf/mycms';
 $direct = basename(__DIR__);
 $folders = glob('../' . $direct . '/*', GLOB_ONLYDIR);
