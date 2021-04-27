@@ -1,5 +1,5 @@
 <?php
-
+ob_start("ob_gzhandler");
 $waterMark='vezha.png';
 $waterMarked='church-in-fog.jpg';
 // Загрузка штампа и фото, для которого применяется водяной знак (называется штамп или печать)
