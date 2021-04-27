@@ -1,18 +1,13 @@
 <?php
 ob_start();
-function showLink($dir, $typeFile)
-{
-    foreach (glob('./' . $dir . '/' . $typeFile) as $filename) {
-        $setLinks = "$filename размер " . filesize($filename) . "<br>";
-    }
-}
-
-$folders = array_map(function ($dir) {return basename($dir);}, glob('../'.basename(__DIR__).'/*', GLOB_ONLYDIR));
+$direct = explode("\\", __DIR__)[4];
+$folders = glob('../' . $direct . '/*', GLOB_ONLYDIR);
 $counter = count($folders);
 $counted = '';
+$fold = '';
 for ($i = 0; $i < $counter; $i++) {
-    $counted .= '<li><a href="./' . $folders[$i] . '/list.php">' . $folders[$i] . '</a></li>';
-    showLink($folders[$i], '*.txt');
+    $fold = explode('/', $folders[$i])[2];
+    $counted .= '<li><a href="./' . $folders[$i] . '/list.php">' . $fold . '</a></li>';
 }
-ob_end_clean();
+//ob_end_clean();
 echo $counted;
