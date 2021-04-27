@@ -13,4 +13,4 @@ for ($i = 0; $i < $counter; $i++) {
 //ob_end_clean();
 echo $counted;
 echo '<pre>', var_dump($folders[1]);
-echo '<pre>', var_dump(explode('/', $folders[1])[2]);
+echo '<pre>', $_SERVER['SERVER_PORT'];
