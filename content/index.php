@@ -13,4 +13,4 @@ for ($i = 0; $i < $counter; $i++) {
 }
 //ob_end_clean();
 echo $counted;
-echo __FILE__;
+echo basename(__DIR__);
