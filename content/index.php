@@ -14,4 +14,4 @@ for ($i = 0; $i < $counter; $i++) {
 }
 //ob_end_clean();
 echo $counted;
-echo basename(__DIR__);
+echo $slash;
