@@ -1,5 +1,4 @@
 <?php
-header('Content-Type: text/html; charset=utf-8');
 //ob_start();
 $ssl = $_SERVER['SERVER_NAME'] == 'localhost' ? 'http://localhost' : 'https://p.cx.ua/pf/mycms';
 $direct = basename(__DIR__);
@@ -14,4 +13,3 @@ for ($i = 0; $i < $counter; $i++) {
 }
 //ob_end_clean();
 echo $counted;
-echo $foldgg;
