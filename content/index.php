@@ -13,4 +13,4 @@ for ($i = 0; $i < $counter; $i++) {
 }
 //ob_end_clean();
 echo $counted;
-echo $ssl;
+echo __DIR__;
