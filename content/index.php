@@ -9,8 +9,6 @@ $fold = '';
 for ($i = 0; $i < $counter; $i++) {
     $fold = explode('/', $folders[$i]);
     $counted .= '<li><a href="' . $ssl . '/' . $fold[1] . '/' . $fold[2] . '/list.php">' . $fold[2] . '</a></li>';
-    $foldgg = '<pre>' . $ssl . '/' . $fold[1] . '/' . $fold[2] . '/list.php' . '<br>';
 }
 //ob_end_clean();
 echo $counted;
-echo $foldgg;
