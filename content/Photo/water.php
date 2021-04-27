@@ -1,6 +1,6 @@
 <?php
 ob_start("ob_gzhandler");
-$waterMark='vezha.png';
+$waterMark='water1.png';
 $waterMarked='church-in-fog.jpg';
 // Загрузка штампа и фото, для которого применяется водяной знак (называется штамп или печать)
 $stamp = imagecreatefrompng($waterMark);
@@ -17,6 +17,6 @@ $sy = imagesy($stamp);
 imagecopy($im, $stamp, imagesx($im) - $sx - $marge_right, imagesy($im) - $sy - $marge_bottom, 0, 0, imagesx($stamp), imagesy($stamp));
 
 // Вывод и освобождение памяти
-header('Content-type: image/jpg');
+header('Content-type: image/png');
 imagepng($im);
 imagedestroy($im);
