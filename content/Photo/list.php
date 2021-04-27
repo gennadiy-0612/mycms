@@ -14,7 +14,7 @@ $ext = '*[.jpg|.jpeg]';
 echo showLink($ext);
 
 echo "test1.jpg:<br />\n";
-$exif = exif_read_data('content/Photo/boat.jpg', 'IFD0');
+$exif = exif_read_data('content/Photo/IMG_20200308_115201_EDIT_1-01.jpeg', 'IFD0');
 echo $exif === false ? "Не найдено данных заголовка.<br />\n" : "Изображение содержит заголовки<br />\n";
 
 $exif = exif_read_data('tests/test2.jpg', 0, true);
