@@ -1,7 +1,7 @@
 <?php
 ob_start();
 $ssl = $_SERVER['SERVER_NAME'] == 'localhost' ? 'http://' : 'https://';
-$slash = $_SERVER['SERVER_NAME'] == 'localhost' ? '/' : '';
+$slash = '/' ;
 $direct = basename(__DIR__);
 $folders = glob('../' . $direct . '/*', GLOB_ONLYDIR);
 $counter = count($folders);
