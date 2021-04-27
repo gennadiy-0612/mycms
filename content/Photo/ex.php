@@ -1,4 +1,5 @@
 <?php
+ob_start("ob_gzhandler");
 echo "test1.jpg:<br />\n";
 $exif = exif_read_data('IMG_20200308_115201_EDIT_1-01.jpeg');
 echo $exif===false ? "Не найдено данных заголовка.<br />\n" : "Изображение содержит заголовки<br />\n";
