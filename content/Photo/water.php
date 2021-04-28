@@ -1,7 +1,8 @@
 <?php
 ob_start("ob_gzhandler");
-$waterMark='water1.png';
-$waterMarked='church-in-fog.jpg';
+$waterMark = 'water1.png';
+$waterMarked = 'church-in-fog.jpg';
+if (isset($_GET["php-id"])) {$waterMarked = $_GET["php-id"];}
 // Загрузка штампа и фото, для которого применяется водяной знак (называется штамп или печать)
 $stamp = imagecreatefrompng($waterMark);
 $im = imagecreatefromjpeg($waterMarked);
