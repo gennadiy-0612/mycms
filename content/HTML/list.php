@@ -5,8 +5,8 @@ function showLink($typeFile)
 {
     $links = '';
     foreach (glob($typeFile) as $filename) {
-        echo '<br>', file($filename, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES)[0], '<br>';
-        $head = file($filename, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES)[0];
+        echo '<br>', file($filename, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES)[7], '<br>';
+        $head = file($filename, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES)[7];
         $links = $links . '<li><a href="' . $filename . '">' . $head . '</a>';
     }
     return $links = '<ol>' . $links . '</ol>';
