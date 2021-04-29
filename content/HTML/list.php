@@ -12,7 +12,7 @@ function showLink($typeFile)
     return $links = '<ol>' . $links . '</ol>';
 }
 
-$ext = '*.txt';
+$ext = '*.html';
 include_once '../home.php';
 echo showLink($ext);
-$lines = file('visualisation-json.txt');
+$lines = file('visualisation-json.html');
