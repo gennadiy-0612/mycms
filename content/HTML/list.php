@@ -11,5 +11,12 @@ function showLink($typeFile)
 }
 
 $ext = '*.html';
+echo '<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>';
 include_once '../home.php';
 echo showLink($ext);
