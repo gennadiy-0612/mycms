@@ -1,4 +1,5 @@
 <?php
+header('Content-Type: text/html; charset=utf-8');
 ob_start("ob_gzhandler");
 $ssl = $_SERVER['SERVER_NAME'] == 'localhost' ? 'http://localhost' : 'https://p.cx.ua/pf/mycms';
 $direct = basename(__DIR__);

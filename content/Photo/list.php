@@ -1,4 +1,5 @@
 <?php
+header('Content-Type: text/html; charset=utf-8');
 ob_start("ob_gzhandler");
 function showLink($typeFile): string
 {
