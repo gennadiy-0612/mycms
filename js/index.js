@@ -26,15 +26,9 @@ shch.AddEvents = function (newProp, event, selectors, cb) {
         adding: function () {
             const listLinks = document.querySelectorAll(selectors);
             let counts = listLinks.length;
-            if (listLinks.length === 1) {
-                counts = 1;
-                console.log(listLinks[0])
-            }
             for (let i = 0; i < counts; i++) {
                 if (!this[selectors + i]) this[selectors + i] = listLinks[i];
                 this[selectors + i].addEventListener(event, cb);
-                console.clear()
-                console.log(this)
             }
         }
     }
@@ -42,7 +36,9 @@ shch.AddEvents = function (newProp, event, selectors, cb) {
 
 shch.setImg = function (e) {
     e.preventDefault();
-    console.log(this.getAttribute('href'))
+    let srcs = this.getAttribute('href');
+    let imgs = '<img class="image" src=content/Photo/' + srcs + '>';
+    document.querySelector('.waterMark').innerHTML = imgs;
 };
 
 shch.setA = function (e) {
@@ -63,10 +59,12 @@ shch.observeIt = function (selector, callback) {
 shch.letGo = function () {
     shch.includeHTML('content/index.php', 'menu');
     shch.includeHTML('content/Photo/list.php', 'listImages');
+
     shch.AE = new shch.AddEvents('.listLinks', 'click', '.listLinks', shch.setImg);
     shch.observeIt('.listImages', shch.AE['.listLinks'].adding.bind(shch.AE));
+
     shch.AE1 = new shch.AddEvents('.waterMark', 'click', '.waterMark', shch.setA);
-    shch.observeIt('.waterMark', shch.AE1['.waterMark'].adding.bind(shch.AE1));
+    shch.AE1['.waterMark'].adding();
 };
 
 window.addEventListener('load', shch.letGo);
