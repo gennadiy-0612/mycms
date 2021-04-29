@@ -5,12 +5,14 @@ function showLink($typeFile)
 {
     $links = '';
     foreach (glob($typeFile) as $filename) {
-        echo '<br>', idn_to_utf8($filename), '<br>';
-        $links = $links . '<li><a href="' . $filename . '">' . $filename . '</a>';
+        echo '<br>', file($filename, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES)[0], '<br>';
+        $head = file($filename, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES)[0];
+        $links = $links . '<li><a href="' . $filename . '">' . $head . '</a>';
     }
     return $links = '<ol>' . $links . '</ol>';
 }
 
-$ext = '*.html';
+$ext = '*.txt';
 include_once '../home.php';
 echo showLink($ext);
+$lines = file('visualisation-json.txt');
