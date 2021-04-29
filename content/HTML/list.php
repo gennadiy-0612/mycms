@@ -5,6 +5,7 @@ function showLink($typeFile)
 {
     $links = '';
     foreach (glob($typeFile) as $filename) {
+        $filename = iconv("UTF-8", "ISO-8859-1", $filename);
         $links = $links . '<li><a href="' . $filename . '">' . $filename . '</a>';
     }
     return $links = '<ol>' . $links . '</ol>';
