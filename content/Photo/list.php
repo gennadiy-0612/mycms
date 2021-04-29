@@ -10,5 +10,5 @@ function showLink($typeFile): string
 }
 
 $ext = "*.{[jJ][pP]{,[eE]}[gG],[tT][iI][fF]{,[fF]}}";
-echo '<a href="../">Home</a>';
+include_once '../home.php';
 echo showLink($ext);

@@ -4,11 +4,11 @@ function showLink($typeFile)
 {
     $links = '';
     foreach (glob($typeFile) as $filename) {
-        echo $filename,'<br>';
         $links = $links . '<li><a href="' . $filename . '">' . $filename . '</a>';
     }
     return $links = '<ol>' . $links . '</ol>';
 }
 
 $ext = '*.html';
+include_once '../home.php';
 echo showLink($ext);
