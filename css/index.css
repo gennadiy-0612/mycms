@@ -1,3 +1,9 @@
-::marker {
-    text-align: center !important;
+.menu {
+    display: flex;
+}
+
+.swipe {
+    height: 200px;
+    width: 200px;
+    background-color: blue;
 }
