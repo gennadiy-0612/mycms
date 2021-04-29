@@ -4,7 +4,8 @@ ob_start("ob_gzhandler");
 function showLink($typeFile)
 {
     $links = '';
-    foreach (glob(utf8_decode($typeFile)) as $filename) {
+    foreach (glob($typeFile) as $filename) {
+        echo '<br>', idn_to_utf8($filename), '<br>';
         $links = $links . '<li><a href="' . $filename . '">' . $filename . '</a>';
     }
     return $links = '<ol>' . $links . '</ol>';
