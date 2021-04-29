@@ -5,7 +5,9 @@ function startup() {
     el.addEventListener("touchcancel", handleCancel, false);
     el.addEventListener("touchmove", handleMove, false);
 }
+
 var ongoingTouches = [];
+
 function handleStart(evt) {
     evt.preventDefault();
     console.log("touchstart.");
@@ -24,6 +26,7 @@ function handleStart(evt) {
         console.log("touchstart:" + i + ".");
     }
 }
+
 function handleMove(evt) {
     evt.preventDefault();
     var el = document.getElementById("canvas");
@@ -35,7 +38,7 @@ function handleMove(evt) {
         var idx = ongoingTouchIndexById(touches[i].identifier);
 
         if (idx >= 0) {
-            console.log("continuing touch "+idx);
+            console.log("continuing touch " + idx);
             ctx.beginPath();
             console.log("ctx.moveTo(" + ongoingTouches[idx].pageX + ", " + ongoingTouches[idx].pageY + ");");
             ctx.moveTo(ongoingTouches[idx].pageX, ongoingTouches[idx].pageY);
@@ -52,6 +55,7 @@ function handleMove(evt) {
         }
     }
 }
+
 function handleEnd(evt) {
     evt.preventDefault();
     log("touchend");
@@ -76,6 +80,7 @@ function handleEnd(evt) {
         }
     }
 }
+
 function handleCancel(evt) {
     evt.preventDefault();
     console.log("touchcancel.");
@@ -86,6 +91,7 @@ function handleCancel(evt) {
         ongoingTouches.splice(idx, 1);  // remove it; we're done
     }
 }
+
 function colorForTouch(touch) {
     var r = touch.identifier % 16;
     var g = Math.floor(touch.identifier / 3) % 16;
@@ -97,9 +103,11 @@ function colorForTouch(touch) {
     console.log("color for touch with identifier " + touch.identifier + " = " + color);
     return color;
 }
-function copyTouch({ identifier, pageX, pageY }) {
-    return { identifier, pageX, pageY };
+
+function copyTouch({identifier, pageX, pageY}) {
+    return {identifier, pageX, pageY};
 }
+
 function ongoingTouchIndexById(idToFind) {
     for (var i = 0; i < ongoingTouches.length; i++) {
         var id = ongoingTouches[i].identifier;
@@ -110,36 +118,10 @@ function ongoingTouchIndexById(idToFind) {
     }
     return -1;    // not found
 }
+
 function log(msg) {
     var p = document.getElementById('log');
     p.innerHTML = msg + "\n" + p.innerHTML;
 }
-function onTouch(evt) {
-    evt.preventDefault();
-    if (evt.touches.length > 1 || (evt.type == "touchend" && evt.touches.length > 0))
-        return;
 
-    var newEvt = document.createEvent("MouseEvents");
-    var type = null;
-    var touch = null;
-
-    switch (evt.type) {
-        case "touchstart":
-            type = "mousedown";
-            touch = evt.changedTouches[0];
-            break;
-        case "touchmove":
-            type = "mousemove";
-            touch = evt.changedTouches[0];
-            break;
-        case "touchend":
-            type = "mouseup";
-            touch = evt.changedTouches[0];
-            break;
-    }
-
-    newEvt.initMouseEvent(type, true, true, evt.originalTarget.ownerDocument.defaultView, 0,
-        touch.screenX, touch.screenY, touch.clientX, touch.clientY,
-        evt.ctrlKey, evt.altKey, evt.shiftKey, evt.metaKey, 0, null);
-    evt.originalTarget.dispatchEvent(newEvt);
-}
+window.addEventListener('load', startup)
