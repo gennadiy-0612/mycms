@@ -5,7 +5,7 @@ function showLink($typeFile): string
 {
     $links = '';
     foreach (glob ($typeFile, GLOB_BRACE) as $filename) {
-        $links = $links . '<li><a href="water.php?php-id=' . $filename . '"><strong>' . $filename . '</strong></a>';
+        $links = $links . '<li><a class="listLinks" href="water.php?php-id=' . $filename . '"><strong>' . $filename . '</strong></a>';
     } 
     return $links = '<ol>' . $links . '</ol>';
 }

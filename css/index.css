@@ -2,8 +2,8 @@
     display: flex;
 }
 
-.swipe {
-    height: 200px;
-    width: 200px;
+.waterMark {
     background-color: blue;
+    height: 100px;
+    width: 300px;
 }
