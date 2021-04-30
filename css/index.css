@@ -88,6 +88,29 @@ li {
     }
 }
 
+.move1 {
+    position: relative;
+}
+
+.move1::after {
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: #ffffff;
+    animation: move1 1s;
+    opacity: 0;
+}
+
+@keyframes move1 {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
 .imageCanvas {
     width: 100%;
     height: 100%;
@@ -126,6 +149,10 @@ li {
     height: 100%;
     -webkit-backface-visibility: hidden; /* Safari */
     backface-visibility: hidden;
+}
+
+.flip-card-back {
+    overflow: hidden;
 }
 
 /* Style the front side (fallback if image is missing) */

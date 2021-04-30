@@ -53,15 +53,41 @@ shch.setImg = function (e) {
 };
 
 shch.NextRead = function () {
-    this.heightAllText = '';
+    this.heightAllText = 0;
     this.moveNext = function () {
+        var allHeight = 0;
+        var l = document.querySelectorAll('.flip-card-back > *');
+        for (var i = 0; i < l.length; i++) {
+            allHeight += l[i].offsetHeight;
+        }
+        console.log('this.heightAllText > allHeight ' + this.heightAllText +" - "+ allHeight)
+        if (this.heightAllText > allHeight) return;
+        shch.anim('.nextRead')
+        this.Paper = document.querySelector('.flip-card-back');
+        this.heightAllText = this.Paper.offsetHeight + this.heightAllText;
+        this.firstEl = document.querySelector('.flip-card-back h2');
+        this.Paper.classList.toggle('move1');
+        this.firstEl.setAttribute('style', 'margin-top:-' + this.heightAllText + 'px');
+        this.heightAllText = this.heightAllText;
 
     }
     this.moveBack = function () {
 
     }
 };
+shch.anim = function (elem) {
+    var myVar = setInterval(myTimer, 1000);
 
+    function myTimer() {
+        var d = new Date();
+        var t = d.toLocaleTimeString();
+        document.querySelector(elem).innerHTML = t;
+    }
+
+    function myStopFunction() {
+        clearInterval(myVar);
+    }
+}
 shch.observeIt = function (selector, callback) {
     const target = document.querySelector(selector);
     const config = {
@@ -82,6 +108,10 @@ shch.letGo = function () {
 
     shch.AE1 = new shch.AddEvents('.waterMark', 'click', '.waterMark', shch.setA);
     shch.AE1['.waterMark'].adding();
+
+    shch.showTextNext = new shch.NextRead();
+    shch.AE2 = new shch.AddEvents('.nextRead', 'click', '.nextRead', shch.showTextNext.moveNext.bind(shch.showTextNext));
+    shch.AE2['.nextRead'].adding();
 };
 
 window.addEventListener('load', shch.letGo);
