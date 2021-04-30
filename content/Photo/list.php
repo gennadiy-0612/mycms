@@ -5,9 +5,9 @@ function showLink($typeFile): string
 {
     $links = '';
     foreach (glob ($typeFile, GLOB_BRACE) as $filename) {
-        $links = $links . '<li><a class="listLinks" href="water.php?php-id=' . $filename . '"><strong>' . $filename . '</strong></a>';
+        $links = $links . '<li class="imageLink"><a class="listLinks" href="water.php?php-id=' . $filename . '"><strong class="info">' . $filename . '</strong></a>';
     } 
-    return $links = '<ol>' . $links . '</ol>';
+    return $links = '<ol class="ListImages">' . $links . '</ol>';
 }
 
 $ext = "*.{[jJ][pP]{,[eE]}[gG],[tT][iI][fF]{,[fF]}}";

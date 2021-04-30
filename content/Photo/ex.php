@@ -1,6 +1,6 @@
 <?php
 ob_start("ob_gzhandler");
-$src = 'IMG_20200308_115201_EDIT_1-01.jpeg';
+$src = 'IMG_20151024_082205.jpg';
 echo '<img src="', $src, '">';
 $exif = exif_read_data($src);
 $exif = exif_read_data($src, 0, true);

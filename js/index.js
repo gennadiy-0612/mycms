@@ -36,13 +36,41 @@ shch.AddEvents = function (newProp, event, selectors, cb) {
 
 shch.setImg = function (e) {
     e.preventDefault();
-    let srcs = this.getAttribute('href');
-    let imgs = '<img class="image" src=content/Photo/' + srcs + '>';
+    let pathIt = 'content/Photo/';
+    let srcs = pathIt + this.getAttribute('href');
+    let imgs = '<img class="imageCanvas" src="' + srcs + '">';
     document.querySelector('.waterMark').innerHTML = imgs;
+    let fn = srcs.split('=')[1].split('.');
+    shch.includeHTML(pathIt + fn[0] + '.html', 'flip-card-back');
+    let currTag = this;
+    if (shch[fn[0]]) return;
+    else {
+        shch[fn[0]] = {
+            initState: 0,
+            initClass: this.getAttribute('class'),
+            secondClass: 'triangle',
+            currClass: '',
+            change: function () {
+                if (shch[fn[0]].initState == 0) {
+                    shch[fn[0]].currClass = shch[fn[0]].initClass + ' ' + shch[fn[0]].secondClass
+                    shch[fn[0]].initState = 1;
+                    return
+                } else {
+                    shch[fn[0]].currClass = shch[fn[0]].initClass
+                    shch[fn[0]].initState = 0
+                }
+                // currTag.setAttribute('class', shch[fn[0]].currClass);
+                console.log(currTag)
+                console.log(shch[fn[0]].currClass)
+                // alert(shch[fn[0]].currClass)
+                // alert(shch[fn[0]].initState)
+            }
+        };
+    }
+    shch[fn[0]].change();
 };
 
 shch.setA = function (e) {
-    console.log(this)
 };
 
 shch.observeIt = function (selector, callback) {
