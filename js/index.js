@@ -43,31 +43,34 @@ shch.setImg = function (e) {
     let fn = srcs.split('=')[1].split('.');
     shch.includeHTML(pathIt + fn[0] + '.html', 'flip-card-back');
     let currTag = this;
-    if (shch[fn[0]]) return;
-    else {
-        shch[fn[0]] = {
-            initState: 0,
-            initClass: this.getAttribute('class'),
-            secondClass: 'triangle',
-            currClass: '',
-            change: function () {
-                if (shch[fn[0]].initState == 0) {
-                    shch[fn[0]].currClass = shch[fn[0]].initClass + ' ' + shch[fn[0]].secondClass
-                    shch[fn[0]].initState = 1;
-                    return
-                } else {
-                    shch[fn[0]].currClass = shch[fn[0]].initClass
-                    shch[fn[0]].initState = 0
-                }
-                // currTag.setAttribute('class', shch[fn[0]].currClass);
-                console.log(currTag)
-                console.log(shch[fn[0]].currClass)
-                // alert(shch[fn[0]].currClass)
-                // alert(shch[fn[0]].initState)
+    if (shch[fn[0]]) {
+        shch[fn[0]].sw();
+        return
+    };
+    shch[fn[0]] = {
+        initState: 0,
+        initClass: this.getAttribute('class'),
+        secondClass: 'triangle',
+        currClass: '',
+        sw: function () {
+            if (shch[fn[0]].initState == 0) {
+                shch[fn[0]].currClass = shch[fn[0]].initClass + ' ' + shch[fn[0]].secondClass
+                shch[fn[0]].initState = 1;
+                return
+            } else {
+                shch[fn[0]].currClass = shch[fn[0]].initClass
+                shch[fn[0]].initState = 0
             }
-        };
-    }
-    shch[fn[0]].change();
+            // currTag.setAttribute('class', shch[fn[0]].currClass);
+            console.log(shch[fn[0]].initState)
+            console.log(shch[fn[0]].currClass)
+            // alert(shch[fn[0]].currClass)
+            // alert(shch[fn[0]].initState)
+        }
+    };
+    console.log(currTag)
+    console.log(shch[fn[0]].currClass)
+    shch[fn[0]].sw();
 };
 
 shch.setA = function (e) {
