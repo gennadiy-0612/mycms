@@ -5,6 +5,12 @@
     flex-wrap: wrap;
 }
 
+.nextRead {
+    height: 50px;
+    width: 100px;
+    background-color: #3498db;
+}
+
 h1, h2, p, a {
     font: normal 400 20px/30px 'Pattaya', sans-serif;
 }

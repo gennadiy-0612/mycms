@@ -52,7 +52,14 @@ shch.setImg = function (e) {
     }
 };
 
-shch.setA = function (e) {
+shch.NextRead = function () {
+    this.heightAllText = '';
+    this.moveNext = function () {
+
+    }
+    this.moveBack = function () {
+
+    }
 };
 
 shch.observeIt = function (selector, callback) {
