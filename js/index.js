@@ -40,6 +40,7 @@ shch.setImg = function (e) {
     let srcs = pathIt + this.getAttribute('href');
     let imgs = '<img class="imageCanvas" src="' + srcs + '">';
     document.querySelector('.waterMark').innerHTML = imgs;
+
     let fn = srcs.split('=')[1].split('.');
     shch.includeHTML(pathIt + fn[0] + '.html', 'flip-card-back');
     let currTag = this;
@@ -61,15 +62,12 @@ shch.setImg = function (e) {
                 shch[fn[0]].currClass = shch[fn[0]].initClass
                 shch[fn[0]].initState = 0
             }
+            console.log(currTag)
             // currTag.setAttribute('class', shch[fn[0]].currClass);
-            console.log(shch[fn[0]].initState)
-            console.log(shch[fn[0]].currClass)
             // alert(shch[fn[0]].currClass)
             // alert(shch[fn[0]].initState)
         }
     };
-    console.log(currTag)
-    console.log(shch[fn[0]].currClass)
     shch[fn[0]].sw();
 };
 
