@@ -1,6 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Pattaya&display=swap');
+
 .menu {
     display: flex;
     flex-wrap: wrap;
+}
+
+h1, h2, p, a {
+    font: normal 400 20px/30px 'Pattaya', sans-serif;
+}
+
+h2 {
+    font-size: 23px;
+}
+
+li {
+    list-style-type: none;
+    margin: 0 5px;
 }
 
 .ListImages {
@@ -72,6 +87,7 @@
     height: 100%;
     object-fit: contain;
 }
+
 /**/
 /* The flip card container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
 .flip-card {
@@ -93,7 +109,7 @@
 }
 
 /* Do an horizontal flip when you move the mouse over the flip box container */
-.flip-card:hover .flip-card-inner {
+.show .flip-card-inner {
     transform: rotateY(180deg);
 }
 

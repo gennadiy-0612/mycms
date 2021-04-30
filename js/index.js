@@ -11,7 +11,7 @@ shch.includeHTML = function (file, showAjax) {
                     showIt.innerHTML = this.responseText;
                 }
                 if (this.status === 404) {
-                    showIt.innerHTML = "Page not found.";
+                    showIt.innerHTML = "<p>Page not found.</p>";
                 }
             }
         }
@@ -43,32 +43,13 @@ shch.setImg = function (e) {
 
     let fn = srcs.split('=')[1].split('.');
     shch.includeHTML(pathIt + fn[0] + '.html', 'flip-card-back');
-    let currTag = this;
-    if (shch[fn[0]]) {
-        shch[fn[0]].sw();
-        return
-    };
-    shch[fn[0]] = {
-        initState: 0,
-        initClass: this.getAttribute('class'),
-        secondClass: 'triangle',
-        currClass: '',
-        sw: function () {
-            if (shch[fn[0]].initState == 0) {
-                shch[fn[0]].currClass = shch[fn[0]].initClass + ' ' + shch[fn[0]].secondClass
-                shch[fn[0]].initState = 1;
-                return
-            } else {
-                shch[fn[0]].currClass = shch[fn[0]].initClass
-                shch[fn[0]].initState = 0
-            }
-            console.log(currTag)
-            // currTag.setAttribute('class', shch[fn[0]].currClass);
-            // alert(shch[fn[0]].currClass)
-            // alert(shch[fn[0]].initState)
-        }
-    };
-    shch[fn[0]].sw();
+    let showEL = document.querySelector('.flip-card');
+    if (shch['shch.setImg'] === this) {
+        showEL.classList.toggle('show');
+    } else {
+        showEL.classList.remove('show');
+        shch['shch.setImg'] = this
+    }
 };
 
 shch.setA = function (e) {
