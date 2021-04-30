@@ -42,7 +42,7 @@ shch.setImg = function (e) {
     document.querySelector('.waterMark').innerHTML = imgs;
 
     let fn = srcs.split('=')[1].split('.');
-    shch.includeHTML(pathIt + fn[0] + '.html', 'flip-card-back');
+    shch.includeHTML(pathIt + fn[0] + '.html', 'paper');
     let showEL = document.querySelector('.flip-card');
     if (shch['shch.setImg'] === this) {
         showEL.classList.toggle('show');
@@ -54,25 +54,25 @@ shch.setImg = function (e) {
 
 shch.NextRead = function () {
     this.heightAllText = 0;
-    this.moveNext = function () {
-        var allHeight = 0;
-        var l = document.querySelectorAll('.flip-card-back > *');
-        for (var i = 0; i < l.length; i++) {
-            allHeight += l[i].offsetHeight;
+    this.allHeight = 0;
+    this.countHeight = function () {
+        let l = document.querySelectorAll('.paper > *');
+        for (let i = 0; i < l.length; i++) {
+            this.allHeight += l[i].offsetHeight;
         }
-        console.log('this.heightAllText > allHeight ' + this.heightAllText +" - "+ allHeight)
-        if (this.heightAllText > allHeight) return;
-        shch.anim('.nextRead')
+    }
+    this.moveNext = function () {
+        this.countHeight();
+        if (this.heightAllText > this.allHeight) return;
         this.Paper = document.querySelector('.flip-card-back');
-        this.heightAllText = this.Paper.offsetHeight + this.heightAllText;
-        this.firstEl = document.querySelector('.flip-card-back h2');
+        this.heightAllText = this.Paper.offsetHeight + this.heightAllText - 25;
+        this.firstEl = document.querySelector('.paper h2');
         this.Paper.classList.toggle('move1');
         this.firstEl.setAttribute('style', 'margin-top:-' + this.heightAllText + 'px');
-        this.heightAllText = this.heightAllText;
-
+        console.log(this.heightAllText + ' ' + this.allHeight + ' this.heightAllText > this.allHeight')
     }
     this.moveBack = function () {
-
+        alert('pp')
     }
 };
 shch.anim = function (elem) {
@@ -112,6 +112,9 @@ shch.letGo = function () {
     shch.showTextNext = new shch.NextRead();
     shch.AE2 = new shch.AddEvents('.nextRead', 'click', '.nextRead', shch.showTextNext.moveNext.bind(shch.showTextNext));
     shch.AE2['.nextRead'].adding();
+
+    // shch.AE2 = new shch.AddEvents('.backRead', 'click', '.backRead', shch.showTextNext.moveBack.bind(shch.showTextNext));
+    // shch.AE2['.backRead'].adding();
 };
 
 window.addEventListener('load', shch.letGo);
