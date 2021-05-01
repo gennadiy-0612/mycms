@@ -11,8 +11,7 @@
     margin: 0;
     display: flex;
     justify-content: space-between;
-    position: absolute;
-    z-index: 2;
+    z-index: 0;
 }
 
 .backRead,
@@ -43,7 +42,7 @@
     margin: 0;
 }
 
-h1, h2, p, a {
+h1, h2, p, strong, a, div {
     font: normal 400 20px/30px 'Pattaya', sans-serif;
 }
 
@@ -84,6 +83,11 @@ li {
     transition: all 1s;
 }
 
+.redAct {
+    background-color: #ff0000;
+    transition: background-color 1s;
+}
+
 .listLinks:hover {
     transform: scale(1.5);
     filter: grayscale(100%);
@@ -96,7 +100,6 @@ li {
     align-items: center;
     justify-content: center;
     position: relative;
-    background-color: #000000;
 }
 
 .waterMark::before {
@@ -117,29 +120,6 @@ li {
     }
     100% {
         transform: rotate(360deg);
-    }
-}
-
-.move1 {
-    position: relative;
-}
-
-.move1::after {
-    content: '';
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    background-color: #ffffff;
-    animation: move1 1s;
-    opacity: 0;
-}
-
-@keyframes move1 {
-    0% {
-        opacity: 1;
-    }
-    100% {
-        opacity: 0;
     }
 }
 
@@ -188,13 +168,8 @@ li {
     position: absolute;
     width: 100%;
     height: 100%;
-    -webkit-backface-visibility: hidden; /* Safari */
     backface-visibility: hidden;
-}
-
-.flip-card-back {
-    overflow: hidden;
-    position: relative;
+    z-index: 0;
 }
 
 /* Style the front side (fallback if image is missing) */
@@ -204,7 +179,10 @@ li {
 }
 
 /* Style the back side */
+
 .flip-card-back {
+    overflow: hidden;
+    position: relative;
     background-color: dodgerblue;
     color: white;
     transform: rotateY(180deg);

@@ -1,5 +1,8 @@
 "use strict"
-let shch = {};
+let shch = {
+    initPathToImg: 'content/Photo/',
+    imgDB: {}
+};
 shch.includeHTML = function (file, showAjax) {
     let showIt = document.querySelector('.' + showAjax);
     if (file) {
@@ -36,19 +39,21 @@ shch.AddEvents = function (newProp, event, selectors, cb) {
 
 shch.setImg = function (e) {
     e.preventDefault();
-    let pathIt = 'content/Photo/';
+    let pathIt = shch.initPathToImg;
     let srcs = pathIt + this.getAttribute('href');
     let imgs = '<img class="imageCanvas" src="' + srcs + '">';
+    shch.imgDB[srcs] ? alert('Img in db') : shch.imgDB[srcs] = imgs;
     document.querySelector('.waterMark').innerHTML = imgs;
 
     let fn = srcs.split('=')[1].split('.');
     shch.includeHTML(pathIt + fn[0] + '.html', 'paper');
     let showEL = document.querySelector('.flip-card');
-    if (shch['shch.setImg'] === this) {
+    if (shch['setImg'].turn === this) {
         showEL.classList.toggle('show');
     } else {
         showEL.classList.remove('show');
-        shch['shch.setImg'] = this
+        this.classList.add('redAct');
+        shch['setImg'].turn = this;
     }
 };
 
@@ -56,33 +61,44 @@ shch.NextRead = function () {
     this.heightAllText = 0;
     this.allHeight = 0;
     this.countHeight = function () {
+        this.Paper = document.querySelector('.flip-card-back');
         let l = document.querySelectorAll('.paper > *');
+        this.firstEl = document.querySelector('.paper h2');
         for (let i = 0; i < l.length; i++) {
             this.allHeight += l[i].offsetHeight;
         }
     }
     this.moveNext = function () {
-        this.countHeight();
+        if (!this.allHeight) this.countHeight();
         if (this.heightAllText > this.allHeight) return;
-        this.Paper = document.querySelector('.flip-card-back');
-        this.heightAllText = this.Paper.offsetHeight + this.heightAllText - 25;
-        this.firstEl = document.querySelector('.paper h2');
-        this.Paper.classList.toggle('move1');
+        this.stepMove = this.heightAllText - 25;
+        this.heightAllText = this.Paper.offsetHeight + this.stepMove;
         this.firstEl.setAttribute('style', 'margin-top:-' + this.heightAllText + 'px');
-        console.log(this.heightAllText + ' ' + this.allHeight + ' this.heightAllText > this.allHeight')
     }
     this.moveBack = function () {
-        alert('pp')
+        if (!this.allHeight) this.countHeight();
+        // this.stepMove = this.heightAllText - 25;
+        // this.heightAllText = this.Paper.offsetHeight - this.stepMove;
+        // alert(this.heightAllText + ' ' + this.Paper.offsetHeight + ' ' + this.stepMove);
+        // this.firstEl.setAttribute('style', 'margin-top:-' + this.heightAllText + 'px');
+        // console.log(this.heightAllText + ' ' + this.allHeight + ' this.heightAllText > this.allHeight')
+        if (this.heightAllText < this.allHeight) return;
     }
 };
+
 shch.anim = function (elem) {
-    var myVar = setInterval(myTimer, 1000);
+    let myVar = setInterval(myTimer, 1000);
+    shch.timeCount = 0;
 
     function myTimer() {
-        var d = new Date();
-        var t = d.toLocaleTimeString();
+        let d = new Date();
+        let t = d.toLocaleTimeString();
         document.querySelector(elem).innerHTML = t;
+        document.querySelector(elem).setAttribute('style', 'margin-left:' + shch.timeCount + 'px');
+        if (shch.timeCount > 100) myStopFunction();
+        shch.timeCount++;
     }
+
 
     function myStopFunction() {
         clearInterval(myVar);
@@ -113,8 +129,9 @@ shch.letGo = function () {
     shch.AE2 = new shch.AddEvents('.nextRead', 'click', '.nextRead', shch.showTextNext.moveNext.bind(shch.showTextNext));
     shch.AE2['.nextRead'].adding();
 
-    // shch.AE2 = new shch.AddEvents('.backRead', 'click', '.backRead', shch.showTextNext.moveBack.bind(shch.showTextNext));
-    // shch.AE2['.backRead'].adding();
+    shch.AE2 = new shch.AddEvents('.backRead', 'click', '.backRead', shch.showTextNext.moveBack.bind(shch.showTextNext));
+    shch.AE2['.backRead'].adding();
+    // shch.anim('.testAnim');
 };
 
 window.addEventListener('load', shch.letGo);
