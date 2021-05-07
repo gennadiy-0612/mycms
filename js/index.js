@@ -6,21 +6,31 @@ let shch = {
 shch.includeHTML = function (file, showAjax) {
     let showIt = document.querySelector('.' + showAjax);
     if (file) {
-        let nghttp;
-        nghttp = new XMLHttpRequest();
-        nghttp.onreadystatechange = function () {
-            if (this.readyState === 4) {
-                if (this.status === 200) {
-                    showIt.innerHTML = this.responseText;
-                }
-                if (this.status === 404) {
-                    showIt.innerHTML = "<p>Page not found.</p>";
+        if (self.fetch) {
+            fetch(file)
+                .then((response) => {
+                    return response.text();
+                })
+                .then((text) => {
+                    showIt.innerHTML = text;
+                });
+        } else {
+            let nghttp;
+            nghttp = new XMLHttpRequest();
+            nghttp.onreadystatechange = function () {
+                if (this.readyState === 4) {
+                    if (this.status === 200) {
+                        showIt.innerHTML = this.responseText;
+                    }
+                    if (this.status === 404) {
+                        showIt.innerHTML = "<p>Page not found.</p>";
+                    }
                 }
             }
+            nghttp.open("GET", file, true);
+            nghttp.send();
+            return true;
         }
-        nghttp.open("GET", file, true);
-        nghttp.send();
-        return true;
     }
 };
 
@@ -42,7 +52,7 @@ shch.setImg = function (e) {
     let pathIt = shch.initPathToImg;
     let srcs = pathIt + this.getAttribute('href');
     let imgs = '<img class="imageCanvas" src="' + srcs + '">';
-    shch.imgDB[srcs] ? alert('Img in db') : shch.imgDB[srcs] = imgs;
+    // shch.imgDB[srcs] ? alert('Img in db') : shch.imgDB[srcs] = imgs;
     document.querySelector('.waterMark').innerHTML = imgs;
 
     let fn = srcs.split('=')[1].split('.');
@@ -57,9 +67,10 @@ shch.setImg = function (e) {
     }
 };
 
-shch.NextRead = function () {
+shch.Read = function () {
     this.heightAllText = 0;
     this.allHeight = 0;
+    this.stepMove = 0;
     this.countHeight = function () {
         this.Paper = document.querySelector('.flip-card-back');
         let l = document.querySelectorAll('.paper > *');
@@ -71,15 +82,17 @@ shch.NextRead = function () {
     this.moveNext = function () {
         if (!this.allHeight) this.countHeight();
         if (this.heightAllText > this.allHeight) return;
+        if (this.heightAllText < this.Paper.offsetHeight + this.stepMove) alert(this.heightAllText + ' ' + this.Paper.offsetHeight + ' ' + this.stepMove);
         this.stepMove = this.heightAllText - 25;
         this.heightAllText = this.Paper.offsetHeight + this.stepMove;
         this.firstEl.setAttribute('style', 'margin-top:-' + this.heightAllText + 'px');
     }
     this.moveBack = function () {
         if (!this.allHeight) this.countHeight();
-        // this.stepMove = this.heightAllText - 25;
+        if (this.heightAllText < this.Paper.offsetHeight + this.stepMove) alert('>')
+        this.stepMove = this.heightAllText - 25;
         // this.heightAllText = this.Paper.offsetHeight - this.stepMove;
-        // alert(this.heightAllText + ' ' + this.Paper.offsetHeight + ' ' + this.stepMove);
+        alert(this.heightAllText + ' ' + this.Paper.offsetHeight + ' ' + this.stepMove);
         // this.firstEl.setAttribute('style', 'margin-top:-' + this.heightAllText + 'px');
         // console.log(this.heightAllText + ' ' + this.allHeight + ' this.heightAllText > this.allHeight')
         if (this.heightAllText < this.allHeight) return;
@@ -99,7 +112,6 @@ shch.anim = function (elem) {
         shch.timeCount++;
     }
 
-
     function myStopFunction() {
         clearInterval(myVar);
     }
@@ -115,9 +127,17 @@ shch.observeIt = function (selector, callback) {
     observer.observe(target, config);
 }
 
+shch.MakeIt = function () {
+    this.one = 'one';
+    this.showOne = function (e) {
+        alert(this.one)
+        alert(e)
+    }
+}
+
 shch.letGo = function () {
-    shch.includeHTML('content/index.php', 'menu');
-    shch.includeHTML('content/Photo/list.php', 'listImages');
+    shch.includeHTML(window.location.origin + '/content/index.php', 'menu');
+    shch.includeHTML(window.location.origin + '/content/Photo/list.php', 'listImages');
 
     shch.AE = new shch.AddEvents('.listLinks', 'click', '.listLinks', shch.setImg);
     shch.observeIt('.listImages', shch.AE['.listLinks'].adding.bind(shch.AE));
@@ -125,13 +145,19 @@ shch.letGo = function () {
     shch.AE1 = new shch.AddEvents('.waterMark', 'click', '.waterMark', shch.setA);
     shch.AE1['.waterMark'].adding();
 
-    shch.showTextNext = new shch.NextRead();
-    shch.AE2 = new shch.AddEvents('.nextRead', 'click', '.nextRead', shch.showTextNext.moveNext.bind(shch.showTextNext));
-    shch.AE2['.nextRead'].adding();
+    shch.showTextNext = new shch.Read();
+    shch.AE2 = new shch.AddEvents('.Read', 'click', '.Read', shch.showTextNext.moveNext.bind(shch.showTextNext));
+    shch.AE2['.Read'].adding();
 
     shch.AE2 = new shch.AddEvents('.backRead', 'click', '.backRead', shch.showTextNext.moveBack.bind(shch.showTextNext));
     shch.AE2['.backRead'].adding();
     // shch.anim('.testAnim');
+
+    // shch.so = new shch.MakeIt();
+    // shch.so1 = new shch.MakeIt();
+    // shch.so1.showOne();
+    // shch.AE2 = new shch.AddEvents('.waterMark', 'click', '.waterMark', shch.so.showOne.bind(shch.so));
+    // shch.AE2['.waterMark'].adding();
 };
 
 window.addEventListener('load', shch.letGo);

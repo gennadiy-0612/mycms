@@ -1,5 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Pattaya&display=swap');
 
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 15px;
+}
+
 .menu {
     display: flex;
     flex-wrap: wrap;
@@ -15,7 +23,7 @@
 }
 
 .backRead,
-.nextRead {
+.Read {
     opacity: .5;
     height: 50px;
     width: 50px;
@@ -23,11 +31,11 @@
 }
 
 .backRead:hover,
-.nextRead:hover {
+.Read:hover {
     opacity: 1;
 }
 
-.nextRead {
+.Read {
     transform: rotate(180deg);
 }
 
